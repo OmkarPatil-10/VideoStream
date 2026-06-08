@@ -1,6 +1,9 @@
 # VideoStream
 
 A minimal video-sharing web app (frontend + backend). The Frontend is a Vite + React app and the Backend is an Express.js API with MongoDB and Cloudinary for media.
+---
+Live Demo: [click here](https://videostream-10.vercel.app/)
+---
 
 Quick overview
 - Frontend: located in `Frontend` — React, Vite, Tailwind.
