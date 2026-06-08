@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== CSS Custom Properties for Theming ===== */
+:root {
+  /* Light mode (default) */
+  --bg-primary:    #f5f6fa;
+  --bg-secondary:  #edeef4;
+  --bg-surface:    rgba(255, 255, 255, 0.85);
+  --bg-card:       rgba(255, 255, 255, 0.75);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-input:      rgba(255, 255, 255, 0.70);
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-card:   rgba(0, 0, 0, 0.06);
+  --text-primary:  #0f1320;
+  --text-secondary:#4a5273;
+  --text-muted:    #8d93ae;
+  --text-placeholder: #b3b7c9;
+  --scrollbar-track: #edeef4;
+  --scrollbar-thumb: #b3b7c9;
+  --scrollbar-thumb-hover: #8d93ae;
+  --shadow-card:   0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.14);
+}
+
+html.dark {
+  /* Dark mode */
+  --bg-primary:    #090c16;
+  --bg-secondary:  #0f1320;
+  --bg-surface:    rgba(15, 19, 32, 0.80);
+  --bg-card:       rgba(26, 31, 46, 0.60);
+  --bg-card-hover: rgba(26, 31, 46, 0.80);
+  --bg-input:      rgba(26, 31, 46, 0.60);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-card:   rgba(255, 255, 255, 0.05);
+  --text-primary:  #f0f1f5;
+  --text-secondary:#8d93ae;
+  --text-muted:    #4a5273;
+  --text-placeholder: #4a5273;
+  --scrollbar-track: #090c16;
+  --scrollbar-thumb: #2a3045;
+  --scrollbar-thumb-hover: #4a5273;
+  --shadow-card:   0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Base Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===== Custom Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 9999px;
+    border: 1px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+/* ===== Glass Morphism Utilities ===== */
+@layer components {
+    /* --- Cards --- */
+    .glass-card {
+        background: var(--bg-card);
+        backdrop-filter: blur(20px) saturate(1.5);
+        -webkit-backdrop-filter: blur(20px) saturate(1.5);
+        border: 1px solid var(--border-card);
+        border-radius: 1rem;
+        box-shadow: var(--shadow-card);
+        transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Light mode: subtle top highlight */
+    html:not(.dark) .glass-card {
+        box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    html.dark .glass-card {
+        box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .glass-card-hover {
+        @apply glass-card;
+        transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .glass-card-hover:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-subtle);
+        box-shadow: var(--shadow-card-hover);
+    }
+
+    .glass-surface {
+        background: var(--bg-surface);
+        backdrop-filter: blur(20px) saturate(1.5);
+        -webkit-backdrop-filter: blur(20px) saturate(1.5);
+        border-color: var(--border-subtle);
+        transition: background 0.3s ease;
+    }
+
+    /* --- Buttons --- */
+    .btn-primary {
+        @apply bg-accent-600 hover:bg-accent-500 text-white font-semibold 
+               rounded-xl transition-all duration-300 
+               shadow-lg shadow-accent-600/20 hover:shadow-xl hover:shadow-accent-600/30
+               active:scale-[0.98];
+    }
+
+    .btn-secondary {
+        background: var(--bg-card);
+        color: var(--text-primary);
+        @apply font-medium rounded-xl border transition-all duration-300 active:scale-[0.98];
+        border-color: var(--border-card);
+    }
+
+    .btn-secondary:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-subtle);
+    }
+
+    .btn-ghost {
+        color: var(--text-muted);
+        @apply rounded-xl transition-all duration-300;
+    }
+
+    .btn-ghost:hover {
+        color: var(--text-primary);
+        background: var(--border-subtle);
+    }
+
+    /* --- Input fields --- */
+    .input-field {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: var(--bg-input);
+        border: 1px solid var(--border-card);
+        border-radius: 0.75rem;
+        color: var(--text-primary);
+        transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .input-field::placeholder {
+        color: var(--text-placeholder);
+    }
+
+    .input-field:focus {
+        outline: none;
+        border-color: rgba(255, 59, 59, 0.5);
+        box-shadow: 0 0 0 3px rgba(255, 59, 59, 0.1);
+    }
+
+    /* --- Badges --- */
+    .badge {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+    }
+
+    .badge-success {
+        @apply badge bg-emerald-500/15 text-emerald-600 border border-emerald-500/25;
+    }
+
+    html.dark .badge-success {
+        @apply text-emerald-400;
+    }
+
+    .badge-warning {
+        @apply badge bg-amber-500/15 text-amber-600 border border-amber-500/25;
+    }
+
+    html.dark .badge-warning {
+        @apply text-amber-400;
+    }
+
+    .badge-danger {
+        @apply badge bg-accent-500/15 text-accent-600 border border-accent-500/25;
+    }
+
+    html.dark .badge-danger {
+        @apply text-accent-400;
+    }
+
+    /* --- Skeleton shimmer --- */
+    .skeleton {
+        background: var(--bg-card);
+        border-radius: 0.5rem;
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .shimmer-bg {
+        background: linear-gradient(
+            90deg,
+            rgba(128, 128, 128, 0) 0%,
+            rgba(128, 128, 128, 0.06) 50%,
+            rgba(128, 128, 128, 0) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 2s linear infinite;
+    }
+
+    /* --- Video card hover lift --- */
+    .video-card {
+        @apply glass-card-hover cursor-pointer;
+        transform: translateY(0);
+    }
+
+    .video-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-card-hover);
+    }
+
+    /* --- Stat card with top-edge glow --- */
+    .stat-card {
+        @apply glass-card p-6 relative overflow-hidden;
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--stat-color, rgba(255, 59, 59, 0.5)), transparent);
+    }
+
+    /* --- Theme toggle button --- */
+    .theme-toggle {
+        @apply relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300;
+        background: var(--bg-card);
+        border: 1px solid var(--border-card);
+        color: var(--text-secondary);
+    }
+
+    .theme-toggle:hover {
+        background: var(--bg-card-hover);
+        color: var(--text-primary);
+        border-color: var(--border-subtle);
+    }
+}
+
+/* ===== Page transition ===== */
+.page-enter {
+    animation: fadeIn 0.4s ease-out, slideUp 0.4s ease-out;
+}
+
+/* ===== Text line clamping ===== */
+.line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+/* ===== Gradient text ===== */
+.gradient-text {
+    @apply bg-gradient-to-r from-accent-400 to-accent-600 bg-clip-text text-transparent;
+}
+
+/* ===== Focus ring for accessibility ===== */
+*:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 59, 59, 0.5);
+    border-radius: 0.5rem;
+}
