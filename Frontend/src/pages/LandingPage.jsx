@@ -484,7 +484,7 @@ const LandingPage = () => {
           <div className="landing-footer-brand">
             <div className="flex items-center gap-2.5 mb-3">
               <div className="w-8 h-8 flex items-center justify-center">
-                  <img src="Public/videoStream-nobg.png" alt="Logo" className="w-9 h-9 object-contain" />
+                  <img src="./Public/videoStream-nobg.png" alt="Logo" className="w-9 h-9 object-contain" />
 
               </div>
               <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
