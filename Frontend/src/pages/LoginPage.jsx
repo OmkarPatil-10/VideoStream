@@ -47,7 +47,7 @@ const LoginPage = () => {
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <div className="w-15 h-15 rounded-xl flex items-center justify-center mx-auto mb-4 ">
-              <img src="Public/videoStream-nobg.png" alt="Logo" className="w-14 h-14 object-contain" />
+              <img src="/videoStream-nobg.png" alt="Logo" className="w-14 h-14 object-contain" />
             </div>
           </Link>
           <h1 className="text-2xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Welcome back</h1>

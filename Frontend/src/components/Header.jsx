@@ -65,7 +65,7 @@ const Header = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group" id="logo-link">
           <div className="w-9 h-9  rounded-xl flex items-center justify-center ">
-            <img src="Public/videoStream-nobg.png" alt="Logo" className="w-9 h-9 object-contain" />
+            <img src="/videoStream-nobg.png" alt="Logo" className="w-9 h-9 object-contain" />
 
           </div>
           <span className="text-lg font-bold hidden md:block tracking-tight">
