@@ -4,6 +4,7 @@ import { useAuthStore, useThemeStore } from './store/store';
 import { userAPI } from './api/api';
 
 import ProtectedRoute from './components/ProtectedRoute';
+import LandingPage from './pages/LandingPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -63,12 +64,15 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        {/* Landing / Home — guests see landing, logged-in users see the feed */}
+        <Route path="/" element={accessToken ? <HomePage /> : <LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
+
         {/* Public Routes */}
         <Route path="/login" element={accessToken ? <Navigate to="/" /> : <LoginPage />} />
         <Route path="/register" element={accessToken ? <Navigate to="/" /> : <RegisterPage />} />
 
-        {/* Home - accessible to all */}
-        <Route path="/" element={<HomePage />} />
+        {/* Public content */}
         <Route path="/video/:videoId" element={<VideoDetailPage />} />
         <Route path="/channel/:username" element={<ChannelPage />} />
 

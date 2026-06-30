@@ -43,6 +43,17 @@ app.use("/api/v1/playlists", playlistRouter )
 app.use("/api/v1/dashboard", dashboardRouter )
 app.use("/api/v1/healthcheck", healthCheckRouter )
 
+// Global error handler middleware
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "Something went wrong";
+    res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+        errors: err.errors || []
+    });
+});
 
 // https://localhost:8000/api/v1/users/register
 export { app } 

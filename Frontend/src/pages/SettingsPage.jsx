@@ -62,6 +62,21 @@ const SettingsPage = () => {
     }
   };
 
+  const handleCoverImageUpdate = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setIsLoading(true);
+    try {
+      const res = await userAPI.updateCoverImage(file);
+      setUser(res.data.data);
+      setSuccess('Cover image updated!');
+    } catch (err) {
+      setError('Failed to update cover image');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleLogout = async () => {
     try { await userAPI.logout(); } catch (e) {}
     logout();
@@ -105,6 +120,32 @@ const SettingsPage = () => {
                 <input type="file" accept="image/*" onChange={handleAvatarUpdate} className="hidden" />
               </label>
             </div>
+          </div>
+        </div>
+
+        {/* Cover Image */}
+        <div className="glass-card rounded-2xl p-6 mb-5" id="cover-image-section">
+          <h2 className="text-lg font-bold mb-4" style={{ color: 'var(--text-primary)' }}>Cover Image</h2>
+          <div className="relative w-full rounded-xl overflow-hidden ring-2 ring-white/10" style={{ aspectRatio: '16 / 4' }}>
+            {user?.coverImage ? (
+              <img src={user.coverImage} alt="Cover" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-r from-accent-700 via-accent-500/60 to-accent-700 flex items-center justify-center">
+                <svg className="w-10 h-10" style={{ color: 'var(--text-muted)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            )}
+          </div>
+          <div className="mt-4 flex items-center gap-3">
+            <label className="px-4 py-2 btn-primary rounded-xl text-sm cursor-pointer inline-flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              {user?.coverImage ? 'Update Cover Image' : 'Add Cover Image'}
+              <input type="file" accept="image/*" onChange={handleCoverImageUpdate} className="hidden" id="cover-image-input" />
+            </label>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Recommended: 1584 × 396px (4:1 ratio)</p>
           </div>
         </div>
 
