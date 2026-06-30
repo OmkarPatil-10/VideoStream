@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { userAPI } from '../api/api';
 import { useAuthStore } from '../store/store';
+import logo from '../assets/videoStream-nobg.png';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const LoginPage = () => {
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <div className="w-15 h-15 rounded-xl flex items-center justify-center mx-auto mb-4 ">
-              <img src="/videoStream-nobg.png" alt="Logo" className="w-14 h-14 object-contain" />
+              <img src={logo} alt="Logo" className="w-14 h-14 object-contain" />
             </div>
           </Link>
           <h1 className="text-2xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>Welcome back</h1>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useThemeStore } from '../store/store';
+import logo from '../assets/videoStream-nobg.png';
 
 /* ─── Animated counter hook ─── */
 const useCountUp = (end, duration = 2000, startOnView = true) => {
@@ -164,7 +165,7 @@ const LandingPage = () => {
 
           <Link to="/" className="flex items-center gap-2.5 group" id="landing-logo">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center ">
-              <img src="/videoStream-nobg.png" alt="Logo" className="w-9 h-9 object-contain" />
+              <img src={logo} alt="Logo" className="w-9 h-9 object-contain" />
             </div>
             <span className="text-lg font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
               Video<span className="gradient-text">Stream</span>
@@ -484,7 +485,7 @@ const LandingPage = () => {
           <div className="landing-footer-brand">
             <div className="flex items-center gap-2.5 mb-3">
               <div className="w-8 h-8 flex items-center justify-center">
-                <img src="/videoStream-nobg.png" alt="footLogo" className="w-9 h-9 object-contain" />
+                <img src={logo} alt="footLogo" className="w-9 h-9 object-contain" />
 
               </div>
               <span className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
