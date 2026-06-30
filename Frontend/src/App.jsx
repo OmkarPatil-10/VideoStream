@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useAuthStore, useThemeStore } from './store/store';
 import { userAPI } from './api/api';
 
+import logo from './assets/videoStream-nobg.png';
+
 import ProtectedRoute from './components/ProtectedRoute';
 import LandingPage from './pages/LandingPage';
 import HomePage from './pages/HomePage';
@@ -50,10 +52,10 @@ const App = () => {
   if (isInitializing) {
     return (
       <div className="min-h-screen flex items-center justify-center transition-colors duration-300"
-           style={{ backgroundColor: 'var(--bg-primary)' }}>
+        style={{ backgroundColor: 'var(--bg-primary)' }}>
         <div className="text-center animate-fade-in">
-          <div className="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-700 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white font-black text-lg animate-pulse-glow">
-            VS
+          <div className="w-12 h-12  flex items-center justify-center mx-auto mb-4  animate-pulse-glow">
+            <img src={logo} alt="Logo" className="w-12 h-12 object-contain" />
           </div>
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Loading...</p>
         </div>
